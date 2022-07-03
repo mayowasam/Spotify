@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Container, Content } from './TopTracks'
 import {BsFillPlayBtnFill, BsShuffle,  } from "react-icons/bs"
-import PImage from '../assets/Playlist.jpeg'
 
 import {useStateVal, Loader} from '../imports'
 import useEndpoint from '../utils/Endpoint'

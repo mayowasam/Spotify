@@ -291,8 +291,8 @@ gap: .5rem;
 
 
 function Playlist() {
-    const { getPlaylist, playMusic, pauseMusic, play } = useEndpoint()
-    const { user, playlist, formatDuration, playerState, setPlayerState } = useStateVal()
+    const { getPlaylist, pauseMusic, play } = useEndpoint()
+    const { user, playlist, formatDuration } = useStateVal()
     const [loading, setLoading] = useState(true)
     const [playlistPlay, setPlaylistPlay] =useState(false)
     // console.log(playlist);

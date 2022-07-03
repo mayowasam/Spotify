@@ -275,10 +275,10 @@ function Artist() {
                             {artistTopTracks.length > 0 && artistTopTracks.map(track => {
 
 
-                                const smallest = track.album.images.reduce((smallest, image) => {
-                                    if (image.height < smallest.height) return image
-                                    return smallest
-                                }, track.album.images[0])
+                                // const smallest = track.album.images.reduce((smallest, image) => {
+                                //     if (image.height < smallest.height) return image
+                                //     return smallest
+                                // }, track.album.images[0])
 
                                 return (
 

@@ -63,7 +63,7 @@ app.post('/refresh', (req, res) => {
         clientId: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         redirectUri: process.env.URI,
-        refreshToken
+        refreshToken 
     });
 
     spotifyApi.refreshAccessToken().then((data) => {

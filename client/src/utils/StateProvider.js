@@ -21,7 +21,6 @@ const StateContext = createContext()
 function StateProvider({ children }) {
     const [accessToken, setAccessToken] = useState("")
     const [refreshToken, setRefreshToken] = useState("")
-    const [expireIn, setExpiresIn] = useState()
     const [topTracks, setTopTracks] = useState([])    
     const [myTopArtists, setMyTopArtists] = useState([])    
     const [playlist, setPlayList] = useState({})    
@@ -46,8 +45,7 @@ function StateProvider({ children }) {
     useEffect(() => {
         setAccessToken(localStorage.getItem("accessToken"))
         setRefreshToken(localStorage.getItem("refreshtoken"))
-        setExpiresIn(localStorage.getItem("expiresin"))
-    }, [accessToken, refreshToken, expireIn])
+    }, [accessToken, refreshToken])
 
     const formatDuration = (ms) => {
         const minutes = Math.floor(ms/60000);
@@ -68,10 +66,8 @@ function StateProvider({ children }) {
         spotifyApi,
         accessToken,
         refreshToken,
-        expireIn,
         setAccessToken,
         setRefreshToken,
-        setExpiresIn,
         dispatch, 
         topTracks, 
         setTopTracks,

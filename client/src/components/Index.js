@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import { Artists, useStateVal } from "../imports"
-import { useEffect, useState } from 'react'
+import {useStateVal } from "../imports"
 import  avatar from '../assets/user.png'
 import useEndpoint from "../utils/Endpoint"
 
@@ -276,7 +275,6 @@ a{
 
 function Index() {
     const { user, playlists, topTracks, myTopArtists, formatDuration } = useStateVal()
-    const [loading, setLoading] = useState(true)
     const {play} =useEndpoint()
 
     const logOut = () => {

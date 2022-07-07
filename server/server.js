@@ -5,15 +5,14 @@ const cors = require('cors')
 const SpotifyWebApi = require('spotify-web-api-node')
 const path = require('path')
 
-// app.use(cors({
-//     // origin: [`${process.env.URI}`],
-//     origin: "http:localhost:3000",
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    // origin: "https://friendsocket.herokuapp.com",
 
-// }
+    credentials: true
+}))
 
-// ))
-
-app.use(cors())
+// app.use(cors())
 
 app.use(express.json({ urlencoded: false }))
 

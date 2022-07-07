@@ -30,7 +30,7 @@ export default function useAuth(code) {
             try {
                 // const { data } = await axios.post("http://localhost:5000/login", { code })
                 const { data } = await axios.post(`${process.env.REACT_APP_URI}/login`, { code })
-                console.log(data);
+                console.log('login data '. data);
                 setAccessToken(data.accesstoken)
                 setRefreshToken(data.refreshtoken)
                 dispatch({ type: 'ADD_TOKEN', payload: data.accesstoken })

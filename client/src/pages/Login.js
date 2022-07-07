@@ -24,6 +24,9 @@ const LoginContainer = styled.div`
 
 
 // console.log(process.env.REACT_APP_URI);
+// redirect_uri=http://localhost:3000&
+// redirect_uri=${process.env.REACT_APP_URI}&
+
 
 function Login() {
     const authEndPoint = `

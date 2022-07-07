@@ -28,7 +28,8 @@ export default function useAuth(code) {
     useEffect(() => {
         const getToken = async () => {
             try {
-                const { data } = await axios.post("http://localhost:5000/login", { code })
+                // const { data } = await axios.post("http://localhost:5000/login", { code })
+                const { data } = await axios.post(`${process.env.REACT_APP_URI}/login`, { code })
                 console.log(data);
                 setAccessToken(data.accesstoken)
                 setRefreshToken(data.refreshtoken)
@@ -55,7 +56,7 @@ export default function useAuth(code) {
         console.log("checking", Date.now() - getTimeGotten() > Time);
 
         if (timeTrefresh) {
-            axios.post("http:localhost:5000/refresh", { refreshToken })
+            axios.post(`${process.env.REACT_APP_URI}/refresh`, { refreshToken })
                 .then(response => {
                     console.log(response.data)
                     // window.history.pushState({}, null, '/') // to clear the url

@@ -17,9 +17,9 @@ app.use(cors())
 
 app.use(express.json({ urlencoded: false }))
 
-app.get('/', (req, res) =>{
-    res.send("working")
-})
+// app.get('/', (req, res) =>{
+//     res.send("working")
+// })
 
 // app.use(express.static(path.join(__dirname, "build")))
 

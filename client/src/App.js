@@ -14,20 +14,25 @@ function App() {
   // console.log(useStateVal());
   const code = new URLSearchParams(window.location.search).get('code')
   // console.log('code', code);
-
   const accessToken = useAuth(code)
+
+  // const acc = localStorage.getItem("accessToken")
 
   // console.log('app stateprovider token', token);
   // console.log(' app useAuth token', accessToken);
+  // console.log("spotifyApi ouside", spotifyApi)
 
   useEffect(() => {
 
-    if (accessToken) {
+    if (token) {
       // console.log('setting accessToken');
-      spotifyApi.setAccessToken(accessToken)
+      // console.log("accesstoken set" ,token);
+      spotifyApi.setAccessToken(token)
+      // console.log("spotifyApi inside", spotifyApi)
+
     }
 
-  }, [accessToken])
+  }, [token])
 
 
 

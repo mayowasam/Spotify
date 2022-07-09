@@ -3,6 +3,7 @@ import { useStateVal, Loader } from "../imports"
 import useEndpoint from "../utils/Endpoint"
 import { Container, Content } from './TopTracks'
 import {Album, AlbumContainer, AlbumContent, AlbumItem} from './Artist'
+import PImage from '../assets/Playlist.jpeg'
 
 
 function Recent() {
@@ -35,7 +36,7 @@ function Recent() {
                             return ( 
                                 <AlbumItem key={track.track.id} onClick={() => play(track.track.album.uri, "track", track.track.track_number -1)}>
                                     <AlbumContainer>
-                                        <img src={track.track.album.images[1].url} alt="avatar" />
+                                        <img src={track.track.album.images.length > 0 ?track.track.album.images[1].url: PImage} alt="avatar" />
 
                                     </AlbumContainer>
                                     <h3>{track.track.album.name}</h3>

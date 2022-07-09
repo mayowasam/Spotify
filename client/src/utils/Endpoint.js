@@ -4,6 +4,54 @@ import axios from 'axios'
 function useEndpoint() {
     const { spotifyApi, dispatch, setTopTracks, setMyTopArtists, setPlayList, setArtist, setArtistAlbum, setArtistTopTracks, setAlbum, setRelatedArtists, setPlaylistArtistsAppear, setSearchTracks, setfeaturedSong, setfeaturedAllSong, setRecent, setCurrentlyPlaying, accessToken, setPlayerState } = useStateVal()
 
+
+    const headers = {
+        "Accept": "application/json",
+        'Authorization': `Bearer ${accessToken}`,
+        "Content-Type": "application/json"
+    }
+
+
+    const getuser = async () => {
+        // console.log("track", track);
+        try {
+            
+
+            const {data} = await axios.get("https://api.spotify.com/v1/me", {
+                headers
+            })
+            // console.log("data", data);
+            let uri = data.uri.split(':')[2];
+            const smallest = data.images.reduce((smallest, image) => {
+                if (image.height < smallest.height) return image
+                return smallest
+            }, data.images[0])
+
+            dispatch({
+                type: "ADD_USER",
+                payload: {
+                    name: data.display_name,
+                    followers: data.followers.total,
+                    img: smallest?.url,
+                    id: uri
+                }
+            })
+
+          
+        } catch (error) {
+            // console.log(error);
+            // console.log(error.response.status);
+            // console.log(error.response.data.error.message === "Invalid access token");
+            if (error.response.status === 401 && error.response.data.error.message === "Invalid access token" ){
+                // console.log("yea access token expired");
+                localStorage.removeItem("accessToken");
+            }
+
+        }
+
+    }
+
+
     const getMe = async () => {
         // console.log('getting user');
 
@@ -100,7 +148,7 @@ function useEndpoint() {
                 // },  data.body.items.album.images[0]) 
                 // console.log('smallest', smallest.url);
 
-                const tracks = data.body.items.map(({ name, id, external_urls, album, artists, duration_ms ,track_number}) => {
+                const tracks = data.body.items.map(({ name, id, external_urls, album, artists, duration_ms ,track_number,uri}) => {
                     let artistName = artists.map(artist => {
                         return artist
                     })
@@ -113,7 +161,8 @@ function useEndpoint() {
                         artistName,
                         duration: duration_ms,
                         uri: album.uri,
-                        track_number
+                        track_number, 
+                        trackuri: uri
 
                     }
                 })
@@ -183,7 +232,7 @@ function useEndpoint() {
         setLoading(true)
         spotifyApi.getAlbum(id)
             .then(function (data) {
-                console.log('Album information', data.body);
+                // console.log('Album information', data.body);
                 setLoading(false)
                 setAlbum(data.body)
             }, function (err) {
@@ -432,13 +481,17 @@ function useEndpoint() {
             .then(function (data) {
 
                 // console.log('Now playing: ' + data.body);
-                // console.log('Now playing: ' + data.body.item.name);
+                // console.log('Now playing: ', data.body);
                 setCurrentlyPlaying({
 
                     id: data.body.item.id,
                     name: data.body.item.name,
-                    artists: data.body.item.artists.map(artist => artist.name),
-                    image: data.body.item.album.images[1].url
+                    // artists: data.body.item.artists.map(artist => artist.name),
+                    artists: data.body.item.artists,
+                    image: data.body.item.album.images[1].url,
+                    artisturi:data.body.item.artists.map(artist => artist.uri),
+                    progress: data.body.progress_ms,
+                    time: data.body.item.duration_ms
 
                 })
 
@@ -502,7 +555,7 @@ function useEndpoint() {
     const playerPrev = async () => {
         try {
             const data = await spotifyApi.skipToPrevious()
-            console.log(data);
+            // console.log(data);
             if (data.statusCode === 204) {
                 console.log("yea");
                 getCurrentPlayed()
@@ -528,11 +581,7 @@ function useEndpoint() {
     //api calls
 
 
-    const headers = {
-        "Accept": "application/json",
-        'Authorization': `Bearer ${accessToken}`,
-        "Content-Type": "application/json"
-    }
+  
 
     const play = async (track, type, number) => {
         // console.log("track", track);
@@ -618,7 +667,7 @@ function useEndpoint() {
     const RepeatMusic = (track) => {
         spotifyApi.setRepeat(track)
             .then(function () {
-                console.log('Repeat track.');
+                // console.log('Repeat track.');
             }, function (err) {
                 //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
                 console.log('Something went wrong!', err);
@@ -634,7 +683,7 @@ function useEndpoint() {
     const shuffleMusic = (val) => {
         spotifyApi.setShuffle(val)
             .then(function () {
-                console.log('Shuffle is on.');
+                // console.log('Shuffle is on.');
             }, function (err) {
                 //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
                 console.log('Something went wrong!', err);
@@ -664,6 +713,7 @@ function useEndpoint() {
 
 
     return {
+        getuser,
         getMe,
         getMyPlaylists,
         getMyTopTracks,

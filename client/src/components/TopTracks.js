@@ -96,8 +96,8 @@ margin-bottom: 1rem;
 
 
 function TopTracks() {
-   const{getMyTopTracks} = useEndpoint()
-   const {formatDuration} = useStateVal()
+    const { getMyTopTracks, play } = useEndpoint()
+    const { formatDuration } = useStateVal()
     const [tracksState, setTracksState] = useState(true)
 
     useEffect(() => {
@@ -105,51 +105,51 @@ function TopTracks() {
 
     }, [])
 
-const { topTracks } = useStateVal()
-return <Container>
-    <Content>
-        <Header>
-            <h1>Top Tracks</h1>
-            <div className="header">
-                <ul>
-                    <li><Link to="">All time</Link></li>
-                   
-                </ul>
+    const { topTracks } = useStateVal()
+    return <Container>
+        <Content>
+            <Header>
+                <h1>Top Tracks</h1>
+                <div className="header">
+                    <ul>
+                        <li><Link to="">All time</Link></li>
 
-            </div>
+                    </ul>
 
-        </Header>
+                </div>
 
-        <Middlecontent>
-            {topTracks.map(track => (
+            </Header>
+
+            <Middlecontent>
+                {topTracks.map(track => (
 
 
-                <div className="middlecontent" key={track.id}>
-                    {/* to play track.external_urls */}
-                    <div className="img">
-                        <img src={track.img} alt="" />
+                    <div className="middlecontent" key={track.id} onClick={() => play(track.uri, "track", track.track_number)}>
+                        {/* to play track.external_urls */}
+                        <div className="img">
+                            <img src={track.img} alt="" />
 
-                    </div>
-                    <p>{track.name}</p>
-                    {/* <div className="title">
+                        </div>
+                        <p>{track.name}</p>
+                        {/* <div className="title">
         <p>sundown</p>
         <p>zara larsson</p>
 
     </div> */}
 
-                    <div className="time">
-                        <p>{formatDuration(track.duration)}</p>
+                        <div className="time">
+                            <p>{formatDuration(track.duration)}</p>
+                        </div>
                     </div>
-                </div>
-            ))}
-        </Middlecontent>
+                ))}
+            </Middlecontent>
 
 
 
-    </Content>
+        </Content>
 
 
-</Container>
+    </Container>
 }
 
 export default TopTracks

@@ -28,12 +28,14 @@ const LoginContainer = styled.div`
 // redirect_uri=${process.env.REACT_APP_URI}&
 
 
+
+
 function Login() {
     const authEndPoint = `
     https://accounts.spotify.com/authorize?client_id=
 ${process.env.REACT_APP_CLIENT_ID}&
 response_type=code&
-redirect_uri=http://localhost:3000&
+redirect_uri=${process.env.REACT_APP_URI}&
 scope=streaming%20
 user-read-private%20
 user-read-email%20

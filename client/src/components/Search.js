@@ -2,6 +2,8 @@ import { Container, Content } from './TopTracks'
 import { useStateVal } from '../imports'
 import styled from 'styled-components'
 import useEndpoint from "../utils/Endpoint"
+import PImage from '../assets/Playlist.jpeg'
+
 
 const Middle = styled.div`
 
@@ -126,7 +128,7 @@ function Search() {
                     <div className="middlecontent" key={tracks.id} onClick={() => play(tracks.album.uri, "track", tracks.track_number -1)}>
                         <div className='first'>
                             <div className="img">
-                                <img src={tracks.album.images[1].url} alt="" />
+                                <img src={tracks.album.images.length > 0  ? tracks.album.images[1].url: PImage} alt="" />
 
                             </div>
                             <div className="title">

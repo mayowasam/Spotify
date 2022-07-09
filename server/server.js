@@ -6,13 +6,12 @@ const SpotifyWebApi = require('spotify-web-api-node')
 const path = require('path')
 
 app.use(cors({
-    origin: ['http://localhost:3000'],
-    // origin: "https://friendsocket.herokuapp.com",
+    // origin: ['http://localhost:3000'],
+    origin: "https://mayowaspotify.herokuapp.com",
 
     credentials: true
 }))
 
-// app.use(cors())
 
 app.use(express.json({ urlencoded: false }))
 
@@ -20,17 +19,17 @@ app.use(express.json({ urlencoded: false }))
 //     res.send("working")
 // })
 
-// app.use(express.static(path.join(__dirname, "build")))
+app.use(express.static(path.join(__dirname, "build")))
 
-// app.get("*", (req, res) =>{
-//     res.sendFile(path.join(__dirname, "build", "index.html"))
-// })
+app.get("*", (req, res) =>{
+    res.sendFile(path.join(__dirname, "build", "index.html"))
+})
 
 
 app.post('/login', async (req, res) => {
-
+console.log("login server running");
     const { code } = req.body
-    // console.log('code', code);
+    console.log('code', code);
     const spotifyApi = new SpotifyWebApi({
         clientId: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,

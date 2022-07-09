@@ -241,7 +241,7 @@ function Artist() {
                     <Top>
                         <div className='img'>
                         {/* <img src={smallest.url} alt="avatar" /> */}
-                        <img src={artist.images ? artist.images[0].url : avatar} alt="avatar" />
+                        <img src={artist.images.length > 0 ? artist.images[0].url : avatar} alt="avatar" />
                         </div>
                         <h2>{artist.name}</h2>
                         <Stat>
@@ -288,15 +288,15 @@ function Artist() {
                                         <div className="img">
                                          
                                         {/* <img src={smallest.url} alt="" /> */}
-                                            <img src={track.album.images ? track.album.images[0].url : PImage} alt="" />
+                                            <img src={track.album.images.length > 0 ? track.album.images[0].url : PImage} alt="" />
 
                                         </div>
                                         <div className="title">
                                             <p>{track.name}</p>
                                             <div className='artistname'>
                                             {
-                                                track.artists.map(artist => (
-                                                        <p>{artist.name}</p>
+                                                track.artists.map((artist, id) => (
+                                                        <p key={id}>{artist.name}</p>
 
 
                                                 ))
@@ -327,7 +327,7 @@ function Artist() {
                                 return (<Link to={`/album/${album.id}`} key={album.id}>
                                         <AlbumItem>
                                             <AlbumContainer>
-                                                <img src={album.images ? album.images[1].url: PImage} alt="avatar" />
+                                                <img src={album.images.length > 0 ? album.images[1].url: PImage} alt="avatar" />
 
                                             </AlbumContainer>
                                             <h3>{album.name}</h3>
@@ -347,13 +347,13 @@ function Artist() {
                                         <RecommendedItem key={recommended.id} onClick={() => play(recommended.album.uri, "track", recommended.track_number -1)}>
                                             <AlbumContainer>
                 
-                                                <img src={recommended.album.images? recommended.album.images[0].url : PImage} alt="avatar" />
+                                                <img src={recommended.album.images.length > 0 ? recommended.album.images[0].url : PImage} alt="avatar" />
 
                                             </AlbumContainer>
                                             <h3>{recommended.name}</h3>
                                             <div className='artist'>
-                                                {recommended.artists.map(artist => (
-                                                        <p>{artist.name} .</p>
+                                                {recommended.artists.map((artist,id) => (
+                                                        <p key={id}>{artist.name} .</p>
                                                 ))}
 
                                                
@@ -373,7 +373,7 @@ function Artist() {
                                     <Link to={`/artists/${artist.id}`} key={artist.id}>
                                         <AlbumItem>
                                             <AlbumContainer>
-                                                <img src={artist.images[1].url} alt="avatar" />
+                                                <img src={artist.images.length > 0 ? artist.images[1].url: avatar} alt="avatar" />
 
                                             </AlbumContainer>
                                             <h3>{artist.name}</h3>

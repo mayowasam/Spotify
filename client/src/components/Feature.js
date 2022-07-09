@@ -3,6 +3,7 @@ import { useStateVal, Loader } from "../imports"
 import useEndpoint from "../utils/Endpoint"
 import { Container, Content } from './TopTracks'
 import {Album, AlbumContainer, AlbumContent, AlbumItem} from './Artist'
+import playImage from '../assets/Playlist.jpeg'
 
 
 function Feature() {
@@ -34,7 +35,7 @@ function Feature() {
                                 
                                 <AlbumItem key={track.id} onClick={() => play(track.uri, "album")}>
                                     <AlbumContainer>
-                                        <img src={track.images[1].url} alt="avatar" />
+                                        <img src={track.images> 0 ? track.images[1].url : playImage} alt="avatar" />
 
                                     </AlbumContainer>
                                     <h3>{track.name}</h3>

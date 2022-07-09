@@ -369,7 +369,7 @@ function Index() {
                     {topTracks.map(track => (
 
 
-                        <div className="middlecontent" key={track.id} onClick={() => play(track.uri, "track", track.track_number)}>
+                        <div className="middlecontent" key={track.id} onClick={() => play(track.uri, "track", (track.track_number-1))}>
                             {/* to play track.external_urls */}
                             <div className="img">
                                 <img src={track.img} alt="" />

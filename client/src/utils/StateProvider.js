@@ -43,7 +43,9 @@ function StateProvider({ children }) {
 // console.log('stateprovider expires', expireIn);
 
     useEffect(() => {
-        setAccessToken(localStorage.getItem("accessToken"))
+        if(localStorage.getItem("accessToken") !== undefined){
+            setAccessToken(localStorage.getItem("accessToken"))
+        }
         setRefreshToken(localStorage.getItem("refreshtoken"))
     }, [accessToken, refreshToken])
 

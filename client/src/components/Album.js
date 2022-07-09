@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Container, Content } from './TopTracks'
 import {BsFillPlayBtnFill, BsShuffle,  } from "react-icons/bs"
-
+import avatar from "../assets/Playlist.jpeg"
 import {useStateVal, Loader} from '../imports'
 import useEndpoint from '../utils/Endpoint'
 
@@ -131,7 +131,7 @@ function Album() {
             <Top>
                 <Box>
                     <div className="img">
-                        <img src={album.images[1].url} alt="" />
+                        <img src={album.images.length > 0 ? album.images[1].url : avatar} alt="" />
 
                     </div>
 

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import styled from 'styled-components'
 import { useStateVal } from "../imports"
 import useEndpoint from "../utils/Endpoint";
+import avatar from '../assets/user.png'
 
 
 const Mid = styled(Middle)`
@@ -96,15 +97,15 @@ function Artist() {
 
             <Mid>
             {myTopArtists.length > 0 && (myTopArtists.map((artist) => {
-                        const smallest = artist.images && artist.images.reduce((smallest, image) => {
-                            if (image.height < smallest.height) return image
-                            return smallest
-                        }, artist.images[0])
+                        // const smallest = artist.images && artist.images.reduce((smallest, image) => {
+                        //     if (image.height < smallest.height) return image
+                        //     return smallest
+                        // }, artist.images[0])
 
                         return (<Link to={`/artists/${artist.id}`} key={artist.id}>
                             <Art>
                                 <div className="img">
-                                    <img src={smallest.url} alt="avatar" />
+                                    <img src={artist.images.length > 0 ? artist.images[0].url : avatar} alt="avatar" />
 
                                 </div>
                                 <div className="title">

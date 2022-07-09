@@ -380,7 +380,7 @@ function Playlist() {
                                     <span>{id + 1}</span>
                                     <ImgContainer>
                                         <div className="img">
-                                            <img src={track.track.album.images[0].url} alt="playlist" />
+                                            <img src={track.track.album.images.length > 0 ? track.track.album.images[0].url: pImage} alt="playlist" />
                                         </div>
                                         <div className='title'>
                                             <p>{track.track.name}</p>

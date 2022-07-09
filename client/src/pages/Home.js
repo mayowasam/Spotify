@@ -53,8 +53,8 @@ position: relative;
 
 function Home() {
 
-  const { getMe, getMyPlaylists, getMyTopTracks, getMyTopArtists, getFollowing, getCurrentPlayed , myPlayingStatus} = useEndpoint()
-  const { user, loading } = useStateVal()
+  const {getuser, getMyPlaylists, getMyTopTracks, getMyTopArtists, getFollowing, getCurrentPlayed , myPlayingStatus} = useEndpoint()
+  const { user, loading, accessToken, spotifyApi } = useStateVal()
   const [tracksState, setTracksState] = useState(true)
   const [artistsState, setArtistsState] = useState(true)
   const [playlistsState, setPlaylistsState] = useState(true)
@@ -63,10 +63,18 @@ function Home() {
 let openRef = useRef(false)
 
   useEffect(() => {
-    // if(openRef.current) return;
-    getMe();
+    if(openRef.current) return;
 
-    // openRef.current = true;
+    if (accessToken){
+      // console.log("running get me");
+      // console.log("accessToken in get me", accessToken);
+      // console.log("spotifyApi in get me", spotifyApi);
+      // getMe();
+      getuser()
+
+    }
+
+    openRef.current = true;
   }, [])
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { Player, useStateVal, Volume } from "../imports"
 import useEndpoint from "../utils/Endpoint"
 import { useEffect, useRef } from "react"
+import { Link } from 'react-router-dom'
 
 const Container = styled.section`
 width:100%;
@@ -45,15 +46,19 @@ align-items: center;
             gap: .5rem;
             .title{
                 color: white;
-                font-size: 1rem;
+                font-size: .8rem;
             }
             
             .artist{
                 display: flex;
-                gap: .5rem;
                 align-items: center;
-                color: grey;
-                font-size: .8rem;
+                gap: .5rem;
+                a{
+                    color: grey;
+                    font-size: .7rem;
+                    text-decoration: none;
+
+                }
 
 
             }
@@ -83,14 +88,14 @@ function Footer() {
 
     useEffect(() => {
         // if(onceRef.current) return; 
-    
+
         getCurrentPlayed()
 
         // return () => onceRef.current = true
     }, [playerState])
 
 
-
+    // console.log("currentPlaying", currentPlaying);
 
 
     return <Container>
@@ -108,7 +113,17 @@ function Footer() {
                         <div className="name">
                             <p className="title">{currentPlaying.name}</p>
                             <div className="artist">
-                                <p>{currentPlaying.artists}</p>
+                                {currentPlaying.artists && currentPlaying.artists.map((artist,id) => {
+                                    return (
+                                        <Link to={`artists/${artist.id}`} key={id}>
+                                            <p>{artist.name}</p>
+                                        </Link>
+
+                                    )
+
+                                })
+
+                                }
                             </div>
                         </div>
                         <div className="like">
@@ -118,11 +133,11 @@ function Footer() {
                     </div>
                 }
 
- 
 
 
 
-                    {/* <div className="first__content" >
+
+                {/* <div className="first__content" >
                         <div className="img">
                             <img src={image} alt="" />
                         </div>
@@ -135,7 +150,7 @@ function Footer() {
                         
 
                     </div> */}
-                
+
             </div>
 
 
@@ -144,7 +159,7 @@ function Footer() {
             </div>
 
             <div className="control">
-                <Volume/>
+                <Volume />
             </div>
 
         </Content>

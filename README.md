@@ -1,4 +1,4 @@
-Spotify P
+Spotify 
 A web app for visualizing personalized Spotify data.View your top artists, top tracks, recently played tracks, and detailtrack. Also play and search for tracks and albums and more.
 
 

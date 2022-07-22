@@ -1,6 +1,6 @@
 import { useEffect, } from "react";
 import { Route, Routes } from "react-router-dom";
-import {Home, Recent, Index, Search, Library, Playlist, TopTracks, Artists, Artist, Album, Login, ScrollTop, useStateVal, Feature} from "./imports";
+import {Home, Recent, Index, Search, Library, Playlist, TopTracks, Artists, Artist, Album, Login, ScrollTop, useStateVal, Feature, Notfound} from "./imports";
 import { GlobalStyles } from "./styles/globalstyles";
 import ArtistOulet from "./components/ArtistOutlet";
 import useAuth from "./utils/useAuth";
@@ -74,6 +74,7 @@ function App() {
 
 
           </Route>
+            <Route path="*" element={<Notfound />} />
 
         </Routes>
       </ScrollTop>

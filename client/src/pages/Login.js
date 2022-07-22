@@ -35,7 +35,7 @@ function Login() {
     https://accounts.spotify.com/authorize?client_id=
 ${process.env.REACT_APP_CLIENT_ID}&
 response_type=code&
-redirect_uri=${process.env.REACT_APP_URI}&
+redirect_uri=http://localhost:3000&
 scope=streaming%20
 user-read-private%20
 user-read-email%20

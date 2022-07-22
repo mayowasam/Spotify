@@ -1,5 +1,6 @@
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Notfound from './pages/Notfound'
 import Sidebar from './components/Sidebar'
 import Main from './components/Main'
 import Footer from './components/Footer'
@@ -41,5 +42,6 @@ export {
     ScrollTop, 
     Player,
     Feature, 
-    Volume
+    Volume,
+    Notfound
 }

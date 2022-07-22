@@ -6,8 +6,8 @@ const SpotifyWebApi = require('spotify-web-api-node')
 const path = require('path')
 
 app.use(cors({
-    origin: ['http://localhost:3000'],
-    // origin: "https://mayowaspotify.herokuapp.com",
+    // origin: ['http://localhost:3000'],
+    origin: "https://mayowaspotify.herokuapp.com",
 
     credentials: true
 }))
